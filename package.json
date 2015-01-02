@@ -1,0 +1,31 @@
+{
+  "name": "qlist",
+  "version": "0.1.0",
+  "description": "very fast double-ended queue and circular buffer",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andrasq/node-qlist"
+  },
+  "main": "index.js",
+  "author": {
+    "name": "Andras",
+    "url": "http://github.com/andrasq"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "nodeunit"
+  },
+  "keywords": [
+    "Andras",
+    "quick",
+    "fast",
+    "list",
+    "stack",
+    "queue",
+    "circular",
+    "buffer"
+  ]
+}
