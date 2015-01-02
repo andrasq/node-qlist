@@ -1,13 +1,8 @@
 qlist
 =====
 
-very fast fifo queue
-
-QList is a classic queue:  items are appended with `push()` and the oldest
-waiting item is retrieved with `shift()`.
-
-QList is very very fast.  It is implemented as an array-mapped circular buffer
-that is extended as needed.
+QList is a very ver fast classic queue:  items are appended with `push()`
+and the oldest waiting item is retrieved with `shift()`.
 
 Currently only the append() and shift() methods are implemented, but
 `unshift()` and `pop()` will be added.  A `remove()` method was considered but
@@ -27,8 +22,8 @@ Benchmark
 The included benchmark script measures the speed of pushes, shifts, and
 push/shift pairs (the expected use cases for this data structure).
 
-        node benchmark/benchmark.js qlist
-        node benchmark/benchmark.js double-ended-queue
+        node benchmark/benchmark.js qlist  // 76.2 m/s
+        node benchmark/benchmark.js double-ended-queue  // 65.8 m/s
 
 
 Analysis
@@ -36,7 +31,8 @@ Analysis
 
 QList was developed as part of an investigation into how `setImmediate()`
 could be made to run faster.  The key observation was that a circular buffer
-is faster than an array or a linked list for storing transient data.
+is faster than an array or a linked list for storing transient data.  QList is
+implemented as circular buffer inside an array that is extended as needed.
 
 Initially designed as a drop-in replacement for the nodejs immediate queue, it
 had the same append / peek / remove / shift / isEmpty methods.  During the 
