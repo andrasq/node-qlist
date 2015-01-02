@@ -41,7 +41,7 @@ is faster than an array or a linked list for storing transient data.
 Initially designed as a drop-in replacement for the nodejs immediate queue, it
 had the same append / peek / remove / shift / isEmpty methods.  During the 
 work with setImmediate, the remove method was found to be redundant, and
-instead removal fas folded into the setImmediate callback validity test.
+instead removal was folded into the setImmediate callback validity test.
 
 QList is implemented as a double-ended queue (though currently just two of the
 four traditional methods are written).
@@ -58,6 +58,8 @@ Methods
 
 ### new List( )
 
+Create a new list.
+
 ### push( item )
 
 Add an item to the end of the list.  `append()` is recognized as meaning push.
@@ -72,7 +74,7 @@ Return the first item on the list without removing it.
 
 ### isEmpty( )
 
-test whether the list is empty, return true / false
+test whether the list is empty, return true / false.
 
 
 TODO
@@ -85,6 +87,6 @@ TODO
 Related Work
 ------------
 
-[dequeue](https://npmjs.org/package/double-ended-queue)
-[qheap](https://npmjs.org/package/qheap)
-[qtimers](https://npmjs.org/package/qtimers)
+- [dequeue](https://npmjs.org/package/double-ended-queue)
+- [qheap](https://npmjs.org/package/qheap)
+- [qtimers](https://npmjs.org/package/qtimers)
