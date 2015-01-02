@@ -7,7 +7,7 @@ and the oldest waiting item is retrieved with `shift()`.
 Currently only the append() and shift() methods are implemented, but
 `unshift()` and `pop()` will be added.  A `remove()` method was considered but
 it slowed the fast path too much for the little benefit it provided.  See
-Analysis, below.
+Discussion, below.
 
         var List = require('qlist');
         var q = new List();
@@ -26,8 +26,15 @@ push/shift pairs (the expected use cases for this data structure).
         node benchmark/benchmark.js double-ended-queue  // 65.8 m/s
 
 
-Analysis
---------
+Installation
+------------
+
+        npm install qlist
+        npm test qlist
+
+
+Discussion
+----------
 
 QList was developed as part of an investigation into how `setImmediate()`
 could be made to run faster.  The key observation was that a circular buffer
@@ -42,12 +49,6 @@ instead removal was folded into the setImmediate callback validity test.
 QList is implemented as a double-ended queue (though currently just two of the
 four traditional methods are written).
 
-
-Installation
-------------
-
-        npm install qlist
-        npm test qlist
 
 Methods
 -------
@@ -76,8 +77,11 @@ test whether the list is empty, return true / false.
 TODO
 ----
 
-- add unshift() method
-- add pop() method
+- add unshift() method (prepend to list)
+- add pop() method (remove and return last item)
+- add top() method (peek at last item)
+- add get(idx) method (peek at arbitrary item)
+- add length() method (return count of items on list)
 
 
 Related Work
