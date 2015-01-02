@@ -21,6 +21,16 @@ Analysis, below.
         q.shift();      // => 1
 
 
+Benchmark
+---------
+
+The included benchmark script measures the speed of pushes, shifts, and
+push/shift pairs (the expected use cases for this data structure).
+
+        node benchmark/benchmark.js qlist
+        node benchmark/benchmark.js double-ended-queue
+
+
 Analysis
 --------
 
