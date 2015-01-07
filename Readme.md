@@ -2,12 +2,11 @@ qlist
 =====
 
 QList is a very very fast classic queue:  items are appended with `push()`
-and the oldest waiting item is retrieved with `shift()`.
+and the oldest waiting item is retrieved with `shift()`.  Items may be
+prepended with `unshift`; the last item can be retrieved with `pop`.
 
-Currently only the append() and shift() methods are implemented, but
-`unshift()` and `pop()` will be added.  A `remove()` method was considered but
-it slowed the fast path too much for the little benefit it provided.  See
-Discussion, below.
+A `remove()` method was considered but it slowed the fast path too much for
+the little benefit it provided.  See Discussion, below.
 
         var List = require('qlist');
         var q = new List();
@@ -47,8 +46,7 @@ work with setImmediate, the remove method was found to be redundant, and
 instead removal was folded into the setImmediate callback validity test.
 (See the [qtimers](https://npmjs.org/package/qtimers) package.)
 
-QList is implemented as a double-ended queue (though currently just two of the
-four traditional methods are written).
+QList is implemented as a double-ended queue.
 
 
 Methods
@@ -62,7 +60,7 @@ Create a new list.
 
 Add an item to the end of the list.  `append()` is recognized as synonym for push.
 
-## pop( )
+### pop( )
 
 Remove and return the last item on the list, else `undefined` if empty list.
 
@@ -93,6 +91,7 @@ TODO
 
 - add top() method (peek at last item)
 - add get(idx) method (peek at arbitrary item)
+- implement a maxLength capacity limit for a true circular buffer
 
 
 Related Work
