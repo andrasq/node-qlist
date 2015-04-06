@@ -40,7 +40,8 @@ could be made to run faster.  The key observation was that a circular buffer
 is faster than an array or a linked list for storing transient data.  QList is
 implemented as circular buffer inside an array that is extended as needed.
 
-Initially designed as a drop-in replacement for the nodejs immediate queue, it
+Initially designed as a drop-in replacement for the nodejs immediate queue
+(see the [qtimers](https://npmjs.org/package/qtimers) package), it
 had the same append / peek / remove / shift / isEmpty methods.  During the 
 work with setImmediate, the remove method was found to be redundant, and
 instead removal was folded into the setImmediate callback validity test.
@@ -86,11 +87,12 @@ test whether the list is empty, return true / false.
 Return the number of items on the list, or 0 zero if empty.
 
 
-TODO
+Todo
 ----
 
-- add top() method (peek at last item)
-- add get(idx) method (peek at arbitrary item)
+- add peek(idx) method (peek at arbitrary item)
+- add peekTail() method (peek at last item)
+- add peekHead() as an alias for peek(0)
 - implement a maxLength capacity limit for a true circular buffer
 
 
