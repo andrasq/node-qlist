@@ -30,6 +30,13 @@ module.exports = {
         t.done();
     },
 
+    'should return undefined on empty list': function(t) {
+        this.cut.shift();
+        t.equal(this.cut._head, 0);
+        t.equal(this.cut._tail, 0);
+        t.done();
+    },
+
     'should store 40k items': function(t) {
         var i, ret = new Array();
         for (i=0; i<40000; i++) this.cut.append(i);
