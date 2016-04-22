@@ -40,7 +40,9 @@ module.exports = {
     'should store 40k items': function(t) {
         var i, ret = new Array();
         for (i=0; i<40000; i++) this.cut.append(i);
-        for (i=0; i<40000; i++) t.equal(i, this.cut.shift());
+        t.equal(this.cut.peek(), 0);
+        t.equal(this.cut.pop(), 39999);
+        for (i=0; i<40000-1; i++) t.equal(i, this.cut.shift());
         t.done();
     },
 
@@ -95,5 +97,25 @@ module.exports = {
         for (i=40000-1; i>=0; i--) t.equals(i, this.cut.pop());
         t.equals(uniq, this.cut.shift());
         t.done();
-    }
+    },
+
+    'toArray should return list contents': function(t) {
+        t.deepEqual(this.cut.toArray(), []);
+        this.cut.push(1);
+        this.cut.push(2);
+        t.deepEqual(this.cut.toArray(), [1, 2]);
+        this.cut.shift();
+        t.deepEqual(this.cut.toArray(), [2]);
+        this.cut.push(3);
+        this.cut.push(4);
+        this.cut.push(5);
+        t.deepEqual(this.cut.toArray(), [2, 3, 4, 5]);
+        this.cut.push(6);
+        t.deepEqual(this.cut.toArray(), [2, 3, 4, 5, 6]);
+        this.cut.shift();
+        t.deepEqual(this.cut.toArray(), [3, 4, 5, 6]);
+        this.cut.pop();
+        t.deepEqual(this.cut.toArray(), [3, 4, 5]);
+        t.done();
+    },
 };

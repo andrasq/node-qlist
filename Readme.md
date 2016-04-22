@@ -82,10 +82,14 @@ Return the first item on the list without removing it.
 
 test whether the list is empty, return true / false.
 
-### length( )
+### size( )
 
 Return the number of items on the list, or 0 zero if empty.
+For historical reasons, also available as `length()`.
 
+### toArray( )
+
+Copy out the contents of the list into an array and return the array.
 
 Todo
 ----
