@@ -11,30 +11,44 @@ assert = require('assert');
 function fptime() { t = process.hrtime(); return t[0] + t[1] * 1e-9; }
 
 function timeList( List ) {
-    nloops = 100000;
+    nloops = 1000000;
+    dataset = new Array(nloops);
+    for (var i=0; i<dataset.length; i++) dataset[i] = Math.random() * 10000 | 0;
 
     var x;
     for (i=0; i<10000; i++) x = fptime();
 
     q = new List();
     t1 = fptime();
-    for (i=0; i<nloops; i++) q.push(Math.random() * 10000 | 0);
-    //for (i=0; i<nloops; i++) q.push(100000000 - i);
+    //for (i=0; i<nloops; i++) q.push(Math.random() * 10000 | 0);
+    for (i=0; i<nloops; i++) q.push(100000000 - i);
     t2 = fptime();
     console.log("push:", nloops, "in", t2-t1, "sec,", nloops/1000/(t2-t1), "k/s");
 
     t1 = fptime();
-    for (i=0; i<nloops; i++) q.shift(i);
+    for (i=0; i<nloops; i++) x = q.shift(i);
     t2 = fptime();
     console.log("shift:", nloops, "in", t2-t1, "sec,", nloops/1000/(t2-t1), "k/s");
 
     q = new List();
     for (i=0; i<1000; i++) q.push(i);
     t1 = fptime();
-    for (i=0; i<nloops; i++) { q.push(Math.random() * 10000 | 0); q.shift(); }
-    //for (i=0; i<nloops; i++) { q.push(100000000 - i); q.shift(); }
+    //for (i=0; i<nloops; i++) { q.push(Math.random() * 10000 | 0); q.shift(); }
+    for (i=0; i<nloops; i++) { q.push(100000000 - i); x = q.shift(); }
     t2 = fptime();
-    console.log("push/shift:", nloops, "in", t2-t1, "sec,", 10*nloops/1000/(t2-t1), "k/s");
+    console.log("push/shift:", nloops, "in", t2-t1, "sec,", nloops/1000/(t2-t1), "k/s");
+
+    q = new List();
+    for (i=0; i<1000; i++) q.push(i);
+    t1 = fptime();
+    //for (i=0; i<nloops; i++) q.push(Math.random() * 10000 | 0);
+    for (i=0; i<nloops/10; i++) {
+        for (var j=0; j<10; j++) q.push(100000000 - j);
+        for (var j=0; j<10; j++) x = q.shift();
+    }
+    t2 = fptime();
+    console.log("push/shift ripple 10: %d in %d sec,", nloops, t2-t1, nloops/1000/(t2-t1), "k/s");
+
 }
 
 package = process.argv[2] || '../index';
@@ -48,3 +62,5 @@ if (package === 'double-ended-queue') { List.prototype.push = List.prototype.enq
 if (package === 'qheap') { }
 
 timeList(List);
+
+console.log(process.memoryUsage())
