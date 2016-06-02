@@ -4,6 +4,7 @@ qlist
 QList is a very very fast classic queue:  items are appended with `push()`
 and the oldest waiting item is retrieved with `shift()`.  Items may be
 prepended with `unshift`; the last item can be retrieved with `pop`.
+QList is implemented as resizable circular buffer mapped into an Array.
 
 A `remove()` method was considered but it slowed the fast path too much for
 the little benefit it provided.  See Discussion, below.
@@ -76,7 +77,17 @@ Add an item at the beginning of the list.  This item would be returned by
 
 ### peek( )
 
-Return the first item on the list without removing it.
+Returns the first item on the list without removing it.
+
+### peekAt( n )
+
+Returns the n-th item on the list.  Zero is the first element, 1 is the second,
+etc.  Elements at negative offsets are that many from the end:  -1 is one before
+the end (the last element), -2 is two before the end (one before last), etc.
+
+This method implements peek() (peekAt(0)), peekTail() (peekAt(-1)) and peekIdx(ix)
+(peekAt(ix)).  A dedicated method is faster than testing for an optional argument
+inside peek().
 
 ### isEmpty( )
 
@@ -99,14 +110,12 @@ Set the list contents from the given array.  Any existing contents are discarded
 Todo
 ----
 
-- add peek(idx) method (peek at arbitrary item)
-- add peekLast() method (peek at last item)
 - implement a maxLength capacity limit for a true circular buffer
 
 
 Related Work
 ------------
 
-- [double-ended-queue](https://npmjs.org/package/double-ended-queue)
-- [qheap](https://npmjs.org/package/qheap)
-- [qtimers](https://npmjs.org/package/qtimers)
+- [double-ended-queue](https://npmjs.org/package/double-ended-queue) - another fast circular buffer
+- [qheap](https://npmjs.org/package/qheap) - partially sorted set
+

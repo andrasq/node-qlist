@@ -46,11 +46,38 @@ module.exports = {
         t.done();
     },
 
-    'peek should return first item': function(t) {
+    'peek() should return first item': function(t) {
+        t.equal(this.cut.peek(), undefined);
         this.cut.append(1);
         this.cut.append(2);
         t.equal(1, this.cut.peek());
         t.equal(1, this.cut.peek());
+        t.done();
+    },
+
+    'peekAt(n) should return n-th item or undefined': function(t) {
+        this.cut.append(1);
+        this.cut.append(2);
+        // [ 1 2 - - ]
+        t.equal(this.cut.peekAt(1), 2);
+        t.equal(this.cut.peekAt(2), undefined);
+        t.equal(this.cut.peekAt(-2), 1);
+        this.cut.append(3);
+        // [ 1 2 3 - ]
+        this.cut.shift();
+        this.cut.shift();
+        // [ - - 3 - ]
+        this.cut.append(4);
+        this.cut.append(5);
+        // [ 5 - 3 4 ]
+        t.equal(this.cut.peekAt(-1), 5);
+        t.equal(this.cut.peekAt(-2), 4);
+        t.equal(this.cut.peekAt(-3), 3);
+        t.equal(this.cut.peekAt(-4), undefined);
+        t.equal(this.cut.peekAt(0), 3);
+        t.equal(this.cut.peekAt(1), 4);
+        t.equal(this.cut.peekAt(2), 5);
+        t.equal(this.cut.peekAt(3), undefined);
         t.done();
     },
 

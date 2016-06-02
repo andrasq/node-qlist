@@ -11,7 +11,7 @@ assert = require('assert');
 function fptime() { t = process.hrtime(); return t[0] + t[1] * 1e-9; }
 
 function timeList( List ) {
-    nloops = 1000000;
+    nloops = 10000000;
     dataset = new Array(nloops);
     for (var i=0; i<dataset.length; i++) dataset[i] = Math.random() * 10000 | 0;
 
@@ -24,6 +24,9 @@ function timeList( List ) {
     for (i=0; i<nloops; i++) q.push(100000000 - i);
     t2 = fptime();
     console.log("push:", nloops, "in", t2-t1, "sec,", nloops/1000/(t2-t1), "k/s");
+    // v0.10: 32m/s
+    // v5: 48m/s
+    // v6: 32m/s
 
     t1 = fptime();
     for (i=0; i<nloops; i++) x = q.shift(i);
@@ -48,6 +51,13 @@ function timeList( List ) {
     }
     t2 = fptime();
     console.log("push/shift ripple 10: %d in %d sec,", nloops, t2-t1, nloops/1000/(t2-t1), "k/s");
+
+    t1 = fptime();
+    if (q.peekAt) for (i=0; i<nloops; i++) { x = q.peekAt(0); }
+    t2 = fptime();
+    console.log("peek: %d in %d sec,", nloops, t2-t1, nloops/1000/(t2-t1), "k/s");
+    // v5: peek: 137m/s
+    // v5: peekAt: 98m/s
 
 }
 
