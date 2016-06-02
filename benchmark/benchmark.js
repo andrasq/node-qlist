@@ -71,6 +71,7 @@ if (package === 'qlist') { }
 if (package === 'heap') { List.prototype.shift = List.prototype.pop; }
 if (package === 'double-ended-queue') { List.prototype.push = List.prototype.enqueue; List.prototype.shift = List.prototype.dequeue; }
 if (package === 'qheap') { }
+if (package === 'fastpriorityqueue') { List.prototype.push = List.prototype.add; List.prototype.shift = List.prototype.poll; }
 
 timeList(List);
 
