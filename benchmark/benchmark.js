@@ -12,8 +12,8 @@ function fptime() { t = process.hrtime(); return t[0] + t[1] * 1e-9; }
 
 function timeList( List ) {
     nloops = 10000000;
-    dataset = new Array(nloops);
-    for (var i=0; i<dataset.length; i++) dataset[i] = Math.random() * 10000 | 0;
+    //dataset = new Array(nloops);
+    //for (var i=0; i<dataset.length; i++) dataset[i] = Math.random() * 10000 | 0;
 
     var x;
     for (i=0; i<10000; i++) x = fptime();
@@ -24,6 +24,7 @@ function timeList( List ) {
     for (i=0; i<nloops; i++) q.push(100000000 - i);
     t2 = fptime();
     console.log("push:", nloops, "in", t2-t1, "sec,", nloops/1000/(t2-t1), "k/s");
+    //console.log(process.memoryUsage());
     // v0.10: 32m/s
     // v5: 48m/s
     // v6: 32m/s

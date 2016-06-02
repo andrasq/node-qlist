@@ -21,9 +21,26 @@ Benchmark
 
 The included benchmark script measures the speed of pushes, shifts, and
 push/shift pairs (the expected use cases for this data structure).
+(Timed with node-v5.10.1 on a 3.5GHz AMD Phenom II B55)
 
-        node benchmark/benchmark.js qlist  // 16 / 34 / 201 m/s
-        node benchmark/benchmark.js double-ended-queue  // 6.4 / 27 / 180 m/s
+        node benchmark/benchmark.js qlist  // 49 / 138 / 81 m/s
+        node benchmark/benchmark.js double-ended-queue  // 12 / 150 / 48 m/s
+
+Tested with the benchmark included in the double-ended-queue repo,
+
+### 1000 items in the queue
+
+    qlist x 24,574,632 ops/sec ±0.33% (102 runs sampled)
+    double-ended-queue x 13,737,005 ops/sec ±0.12% (102 runs sampled)
+    node-deque x 6,033,985 ops/sec ±15.86% (94 runs sampled)
+    built-in array x 1,477,859 ops/sec ±0.14% (98 runs sampled)
+
+### 2 million items in the queue
+
+    qlist x 24,170,807 ops/sec ±0.12% (103 runs sampled)
+    double-ended-queue x 14,197,766 ops/sec ±0.17% (100 runs sampled)
+    node-deque x 1,851,165 ops/sec ±6.65% (79 runs sampled)
+    built-in array x 80.35 ops/sec ±0.49% (71 runs sampled)
 
 
 Installation
