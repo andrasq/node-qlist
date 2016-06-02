@@ -118,4 +118,11 @@ module.exports = {
         t.deepEqual(this.cut.toArray(), [3, 4, 5]);
         t.done();
     },
+
+    'fromArray should populate list contents': function(t) {
+        this.cut.fromArray([1, 2, 3]);
+        t.equal(this.cut.peek(), 1);
+        t.equal(this.cut.pop(), 3);
+        t.done();
+    },
 };

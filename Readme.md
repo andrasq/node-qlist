@@ -91,12 +91,16 @@ For historical reasons, also available as `length()`.
 
 Copy out the contents of the list into an array and return the array.
 
+### fromArray( array )
+
+Set the list contents from the given array.  Any existing contents are discarded.
+
+
 Todo
 ----
 
 - add peek(idx) method (peek at arbitrary item)
-- add peekTail() method (peek at last item)
-- add peekHead() as an alias for peek(0)
+- add peekLast() method (peek at last item)
 - implement a maxLength capacity limit for a true circular buffer
 
 
