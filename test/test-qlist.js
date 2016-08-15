@@ -14,8 +14,11 @@ module.exports = {
         t.done();
     },
 
-    'append should be alias for push': function(t) {
+    'should support common aliases': function(t) {
         t.equal(this.cut.append, this.cut.push);
+        t.equal(this.cut.enqueue, this.cut.push);
+        t.equal(this.cut.dequeue, this.cut.shift);
+        t.equal(this.cut.getLength, this.cut.size);
         t.done();
     },
 
