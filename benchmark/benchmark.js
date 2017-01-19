@@ -63,6 +63,7 @@ function timeList( List ) {
 }
 
 package = process.argv[2] || '../index';
+if (package === 'qheap') package = '../';
 
 List = require(package);
 
