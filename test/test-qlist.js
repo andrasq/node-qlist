@@ -1,4 +1,3 @@
-assert = require('assert');
 List = require('../index');
 
 module.exports = {
@@ -84,6 +83,37 @@ module.exports = {
         t.done();
     },
 
+    'setAt(n,v) should set the n-th item': function(t) {
+        this.cut.append(1);
+        this.cut.append(2);
+        // [ 1 2 - - ]
+        var v = this.cut.setAt(1, 22);
+        // [ 1 22 - - ]
+        t.strictEqual(v, 22);
+        t.equal(this.cut.size(), 2);
+        t.equal(this.cut.peekAt(0), 1);
+        t.equal(this.cut.peekAt(1), 22);
+        t.equal(this.cut.peekAt(2), undefined)
+        var v = this.cut.setAt(3, 3);
+        // [ 1 22 - - ]
+        t.strictEqual(v, undefined);
+        t.equal(this.cut.size(), 2);
+        t.equal(this.cut.peekAt(3), undefined);
+        var v = this.cut.setAt(-2, 11);
+        // [ 11 22 - - ]
+        t.strictEqual(v, 11);
+        t.equal(this.cut.size(), 2);
+        t.equal(this.cut.peekAt(0), 11);
+        t.equal(this.cut.peekAt(1), 22);
+        var v = this.cut.setAt(-3, 3);
+        // [ 11 22 - - ]
+        t.strictEqual(v, undefined);
+        t.equal(this.cut.peekAt(0), 11);
+        t.equal(this.cut.peekAt(1), 22);
+        t.equal(this.cut.size(), 2);
+        t.done();
+    },
+
     'isEmpty should return true on empty list': function(t) {
         t.ok(this.cut.isEmpty());
         this.cut.append(1);
@@ -93,19 +123,19 @@ module.exports = {
 
     'length should return the number of items on the list': function(t) {
         var i;
-        assert.equal(this.cut.length(), 0);
+        t.equal(this.cut.length(), 0);
         this.cut.push(1);
-        assert.equal(this.cut.length(), 1);
+        t.equal(this.cut.length(), 1);
         this.cut.unshift(2);
-        assert.equal(this.cut.length(), 2);
+        t.equal(this.cut.length(), 2);
         this.cut.unshift(3);
-        assert.equal(this.cut.length(), 3);
+        t.equal(this.cut.length(), 3);
         this.cut.unshift(4);
         this.cut.push(5);
-        assert.equal(this.cut.length(), 5);
+        t.equal(this.cut.length(), 5);
         for (i=4; i>=0; i--) {
             this.cut.shift();
-            assert.equal(this.cut.length(), i);
+            t.equal(this.cut.length(), i);
         }
             
         t.done();

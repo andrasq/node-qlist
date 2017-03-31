@@ -106,6 +106,12 @@ This method implements peek() (peekAt(0)), peekTail() (peekAt(-1)) and peekIdx(i
 (peekAt(ix)).  A dedicated method is faster than testing for an optional argument
 inside peek().
 
+### setAt( n, value )
+
+Change the value of the n-th item on the list.  N is the element specifier like for
+`peekAt`.  This call will not extend the length of the list.  Returns the assigned
+`value` or `undefined` if `n` was out of range.
+
 ### isEmpty( )
 
 test whether the list is empty, return true / false.
