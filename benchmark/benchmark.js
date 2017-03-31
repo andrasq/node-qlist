@@ -2,7 +2,7 @@
  * benchmark test rig for list-like data structures
  * that have push() and shift() methods.
  *
- * Copyright (C) 2015 Andras Radics
+ * Copyright (C) 2015-2017 Andras Radics
  * Licensed under the Apache License, Version 2.0
  */
 
