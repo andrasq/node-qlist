@@ -172,6 +172,7 @@ module.exports = {
         for (i=0; i<40000; i++) this.cut.push(i);
         for (i=40000-1; i>=0; i--) t.equals(i, this.cut.pop());
         t.equals(uniq, this.cut.shift());
+        t.equal(this.cut.pop(), undefined);
         t.done();
     },
 
@@ -199,6 +200,42 @@ module.exports = {
         this.cut.fromArray([1, 2, 3]);
         t.equal(this.cut.peek(), 1);
         t.equal(this.cut.pop(), 3);
+        t.equal(this.cut.size(), 2);
+        t.done();
+    },
+
+    'pop should shrink array when 3/4 empty': function(t) {
+        for (var i=0; i<40010; i++) this.cut.push(i);
+        var cap1 = this.cut._capacityMask;
+        for (var i=0; i<30005; i++) this.cut.pop();
+        var cap2 = this.cut._capacityMask;
+        t.ok(cap1 > cap2);
+        t.done();
+    },
+
+    'shift should shink array when 3/4 empty': function(t) {
+        for (var i=0; i<65535; i++) this.cut.push(i);
+        for (var i=0; i<65535; i++) this.cut.shift();
+        this.cut.push(1);
+        this.cut.shift();
+        // now _list is 64k in length, _head == _tail == 0
+        // TODO: will not shink array even if _list is millions long
+        // until have more than 10k elements
+        for (var i=0; i<10001; i++) this.cut.push(i);
+        var cap1 = this.cut._capacityMask;        
+        this.cut.shift();
+        var cap2 = this.cut._capacityMask;
+        t.ok(cap1 > cap2);
+        t.done();
+    },
+
+    'fromList should grow array as needed': function(t) {
+        var cap1 = this.cut._capacityMask;
+        var data = [];
+        for (var i=0; i<257; i++) data.push(i);
+        this.cut.fromArray(data);
+        var cap2 = this.cut._capacityMask;
+        t.ok(cap2 > cap1);
         t.done();
     },
 };
