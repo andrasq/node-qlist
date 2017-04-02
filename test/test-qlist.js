@@ -13,11 +13,27 @@ module.exports = {
         t.done();
     },
 
+    'should have expected methods': function(t) {
+        t.equal(typeof this.cut.push, 'function');
+        t.equal(typeof this.cut.unshift, 'function');
+        t.equal(typeof this.cut.peek, 'function');
+        t.equal(typeof this.cut.isEmpty, 'function');
+        t.equal(typeof this.cut.size, 'function');
+        t.equal(typeof this.cut.toArray, 'function');
+        t.equal(typeof this.cut.fromArray, 'function');
+        t.equal(typeof this.cut.peekAt, 'function');
+        t.equal(typeof this.cut.pokeAt, 'function');
+        t.done();
+    },
+
     'should support common aliases': function(t) {
         t.equal(this.cut.append, this.cut.push);
         t.equal(this.cut.enqueue, this.cut.push);
         t.equal(this.cut.dequeue, this.cut.shift);
         t.equal(this.cut.getLength, this.cut.size);
+        t.equal(this.cut.get, this.cut.peekAt);
+        t.equal(this.cut.set, this.cut.pokeAt);
+        t.equal(this.cut.setAt, this.cut.pokeAt);
         t.done();
     },
 
