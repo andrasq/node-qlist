@@ -99,6 +99,15 @@ module.exports = {
         t.done();
     },
 
+    'peekAt(n) should return n-th item in fromArray list': function(t) {
+        var dataset = [1, 2, 3, 4, 5, 6];
+        var l = new List().fromArray(dataset);
+        var vals = [];
+        for (var i=0; i<l.size(); i++) vals[i] = l.peekAt(i);
+        t.deepEqual(vals, dataset);
+        t.done();
+    },
+
     'setAt(n,v) should set the n-th item': function(t) {
         this.cut.append(1);
         this.cut.append(2);
