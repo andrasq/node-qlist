@@ -1,6 +1,9 @@
 qlist
 =====
 
+[![Build Status](https://api.travis-ci.org/andrasq/node-qlist.svg?branch=master)](https://travis-ci.org/andrasq/node-qlist)
+[![Coverage Status](https://coveralls.io/repos/github/andrasq/node-qlist/badge.svg?branch=master)](https://coveralls.io/github/andrasq/node-qlist?branch=master)
+
 QList is a very very fast classic queue:  items are appended with `push()`
 and the oldest waiting item is retrieved with `shift()`.  Items may be
 prepended with `unshift`; the last item can be retrieved with `pop`.
