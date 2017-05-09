@@ -16,13 +16,11 @@
     "node": "*"
   },
   "scripts": {
-    "test": "qnit",
+    "test": "qnit test/",
     "coverage": "nyc --reporter lcov --reporter text npm test",
-    "clean": "rm -rf .nyc_output coverage",
-    "coveralls": "nyc --reporter text-lcov npm test | coveralls"
+    "clean": "rm -rf .nyc_output coverage"
   },
   "devDependencies": {
-    "qnit": "^0.11"
   },
   "keywords": [
     "Andras",

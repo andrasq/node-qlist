@@ -2,7 +2,7 @@ qlist
 =====
 
 [![Build Status](https://api.travis-ci.org/andrasq/node-qlist.svg?branch=master)](https://travis-ci.org/andrasq/node-qlist)
-[![Coverage Status](https://coveralls.io/repos/github/andrasq/node-qlist/badge.svg?branch=master)](https://coveralls.io/github/andrasq/node-qlist?branch=master)
+[![Coverage Status](https://codecov.io/github/andrasq/node-qlist/coverage.svg?branch=master)](https://codecov.io/github/andrasq/node-qlist?branch=master)
 
 QList is a very very fast classic queue:  items are appended with `push()`
 and the oldest waiting item is retrieved with `shift()`.  Items may be
@@ -44,13 +44,6 @@ Tested with the benchmark included in the double-ended-queue repo,
     double-ended-queue x 14,197,766 ops/sec ±0.17% (100 runs sampled)
     node-deque x 1,851,165 ops/sec ±6.65% (79 runs sampled)
     built-in array x 80.35 ops/sec ±0.49% (71 runs sampled)
-
-
-Installation
-------------
-
-        npm install qlist
-        npm test qlist
 
 
 Discussion
