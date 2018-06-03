@@ -53,8 +53,26 @@ function timeList( List ) {
     t2 = fptime();
     console.log("push/shift ripple 10: %d in %d sec,", nloops, t2-t1, nloops/1000/(t2-t1), "k/s");
 
+    q = new List();
+    for (i=0; i<1000; i++) q.unshift(i);
     t1 = fptime();
-    if (q.peekAt) for (i=0; i<nloops; i++) { x = q.peekAt(0); }
+    for (i=0; i<nloops; i++) { q.unshift(100000000 - i); x = q.pop(); }
+    t2 = fptime();
+    console.log("unshift/pop:", nloops, "in", t2-t1, "sec,", nloops/1000/(t2-t1), "k/s");
+
+    q = new List();
+    for (i=0; i<1000; i++) q.unshift(i);
+    t1 = fptime();
+    for (i=0; i<nloops/10; i++) {
+        for (var j=0; j<10; j++) q.unshift(100000000 - j);
+        for (var j=0; j<10; j++) x = q.pop();
+    }
+    t2 = fptime();
+    console.log("unshift/pop ripple 10: %d in %d sec,", nloops, t2-t1, nloops/1000/(t2-t1), "k/s");
+
+    t1 = fptime();
+    //if (q.peekAt) for (i=0; i<nloops; i++) { x = q.peekAt(0); }
+    if (q.peek) for (i=0; i<nloops; i++) { x = q.peek(); }
     t2 = fptime();
     console.log("peek: %d in %d sec,", nloops, t2-t1, nloops/1000/(t2-t1), "k/s");
     // v5: peek: 137m/s
@@ -70,7 +88,8 @@ List = require(package);
 // shims to be able to time other list-like packages
 if (package === 'qlist') { }
 if (package === 'heap') { List.prototype.shift = List.prototype.pop; }
-if (package === 'double-ended-queue') { List.prototype.push = List.prototype.enqueue; List.prototype.shift = List.prototype.dequeue; }
+if (package === 'double-ended-queue') { List.prototype.push = List.prototype.enqueue; List.prototype.shift = List.prototype.dequeue;
+    List.prototype.peek = List.prototype.peekAt = List.prototype.peekFront; }
 if (package === 'qheap') { }
 if (package === 'fastpriorityqueue') { List.prototype.push = List.prototype.add; List.prototype.shift = List.prototype.poll; }
 
