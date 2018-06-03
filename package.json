@@ -1,6 +1,6 @@
 {
   "name": "qlist",
-  "version": "0.13.2",
+  "version": "0.14.0",
   "description": "very fast double-ended queue, stack and circular buffer",
   "license": "Apache-2.0",
   "repository": {
