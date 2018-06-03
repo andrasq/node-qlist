@@ -8,6 +8,7 @@
     "url": "git://github.com/andrasq/node-qlist"
   },
   "main": "index.js",
+  "readme": "see Readme.md in the repo",
   "author": {
     "name": "Andras",
     "url": "http://github.com/andrasq"
