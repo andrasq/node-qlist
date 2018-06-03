@@ -1,3 +1,8 @@
+/**
+ * Copyright (C) 2014-2018 Andras Radics
+ * Licensed under the Apache License, Version 2.0
+ */
+
 List = require('../index');
 
 module.exports = {
@@ -182,6 +187,22 @@ module.exports = {
         for (i=40000-1; i>=0; i--) t.equals(i, this.cut.pop());
         t.equals(uniq, this.cut.shift());
         t.equal(this.cut.pop(), undefined);
+        t.done();
+    },
+
+    'shift should overwrite the removed item slot': function(t) {
+        this.cut.push({});
+        t.deepEqual(this.cut._list[this.cut._head], {});
+        this.cut.shift();
+        t.equal(this.cut._list[this.cut._head - 1], -1);
+        t.done();
+    },
+
+    'pop should overwrite the removed item slot': function(t) {
+        this.cut.push({});
+        t.deepEqual(this.cut._list[this.cut._tail - 1], {});
+        this.cut.pop();
+        t.equal(this.cut._list[this.cut._tail], -1);
         t.done();
     },
 
